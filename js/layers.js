@@ -24,6 +24,16 @@ addLayer("a", {
     hotkeys: [
         {key: "a", description: "A: Reset for Attention spans", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
     ],
+    upgrades: {
+        rows: 2,
+        cols: 3,
+        11: {
+            title: "Generator of Genericness",
+            description: "Gain 1 Point every second.",
+            cost: new Decimal(1),
+            unlocked() { return player[this.layer].unlocked }, // The upgrade is only visible when this is true
+        },
+    },
 })  
 addLayer("p", {
     name: "pussy", // This is optional, only used in a few places, If absent it just uses the layer id.
