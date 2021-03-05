@@ -2,7 +2,7 @@ let modInfo = {
 	name: "The Stupid Tree",
 	id: "dumb",
 	author: "nobody",
-	pointsName: "points",
+	pointsName: "fucks",
 	discordName: "",
 	discordLink: "",
 	initialStartPoints: new Decimal (10), // Used for hard resets and new players
@@ -12,8 +12,8 @@ let modInfo = {
 
 // Set your version in num and name
 let VERSION = {
-	num: "0.0",
-	name: "Literally nothing",
+	num: "0.1",
+	name: "Literally nothing special",
 }
 
 let changelog = `<h1>Changelog:</h1><br>
