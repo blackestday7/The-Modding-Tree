@@ -5,7 +5,7 @@ let modInfo = {
 	pointsName: "fucks",
 	discordName: "",
 	discordLink: "",
-	initialStartPoints: new Decimal (1), // Used for hard resets and new players
+	initialStartPoints: new Decimal(1), // Used for hard resets and new players
 	
 	offlineLimit: 1,  // In hours
 }
@@ -33,7 +33,7 @@ function getStartPoints(){
 
 // Determines if it should show points/sec
 function canGenPoints(){
-	return true
+	return hasUpgrade("a", 11)
 }
 
 // Calculate points/sec!
