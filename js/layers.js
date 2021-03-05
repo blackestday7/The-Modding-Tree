@@ -25,11 +25,21 @@ addLayer("a", {
         {key: "a", description: "A: Reset for Attention spans", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
     ],
     layerShown(){return true},
+    upgrades: {
+        rows: 1,
+        cols: 1,
+        11: {
+            description: "Blah",
+            cost: new Decimal(100),
+            effect(gain = new Decimal(2))
+        },
+        etc
+    }
 })
 addLayer("p", {
     name: "pussy", // This is optional, only used in a few places, If absent it just uses the layer id.
     symbol: "P", // This appears on the layer's node. Default is the id with the first letter capitalized
-    position: 0, // Horizontal position within a row. By default it uses the layer id and sorts in alphabetical order
+    position: 1, // Horizontal position within a row. By default it uses the layer id and sorts in alphabetical order
     startData() { return {
         unlocked: true,
 		points: new Decimal(0),
