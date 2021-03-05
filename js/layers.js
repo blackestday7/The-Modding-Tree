@@ -24,17 +24,6 @@ addLayer("a", {
     hotkeys: [
         {key: "a", description: "A: Reset for Attention spans", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
     ],
-    layerShown(){return true},
-    upgrades: {
-        rows: 1,
-        cols: 1,
-        11: {
-            description: "Blah",
-            cost: new Decimal(100),
-            effect(gain = new Decimal(2))
-        },
-        etc
-    }
 })
 addLayer("p", {
     name: "pussy", // This is optional, only used in a few places, If absent it just uses the layer id.
