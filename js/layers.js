@@ -25,4 +25,14 @@ addLayer("a", {
         {key: "a", description: "A: Reset for Attention", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
     ],
     layerShown(){return true},
+    upgrades: {
+        rows: 1,
+        cols: 1,
+        11: {
+            description: "Blah",
+            cost: new Decimal(100),
+            etc
+        },
+        etc
+    }
 })
