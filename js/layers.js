@@ -51,7 +51,7 @@ addLayer("a", {
             cost: new Decimal(5),
             unlocked() { return (hasUpgrade(this.layer, 12))},
             effect() { // Calculate bonuses from the upgrade. Can return a single value or an object with multiple values
-                let ret = player[this.layer].points.add(1).pow(player[this.layer].upgrades.includes(24)?1.1:(player[this.layer].upgrades.includes(14)?1.25:1)) 
+                let ret = player[this.layer].points.add(1).pow(player[this.layer].upgrades.includes(24)?1.1:(player[this.layer].upgrades.includes(14)?1.7:1.3)) 
                 if (ret.gte("1e20000000")) ret = ret.sqrt().times("1e10000000")
                 return ret;
             },
@@ -64,6 +64,19 @@ addLayer("a", {
             unlocked() { return (hasUpgrade(this.layer, 12))},
             effect() { // Calculate bonuses from the upgrade. Can return a single value or an object with multiple values
                 let ret = player.points.add(1).pow(player[this.layer].upgrades.includes(24)?1.1:(player[this.layer].upgrades.includes(14)?0.5:0.25)) 
+                if (ret.gte("1e20000000")) ret = ret.sqrt().times("1e10000000")
+                if (hasUpgrade("a", 22)) ret = ret.times(upgradeEffect("a", 22))
+                return ret;
+            },
+            effectDisplay() { return format(this.effect())+"x" }, // Add formatting to the effect
+        },
+        22: {
+            title: "Logarithmic dawdling",
+            description: "The last upgrade is better based on your unspent Attention span.",
+            cost: new Decimal(100),
+            unlocked() { return (hasUpgrade(this.layer, 21))},
+            effect() { // Calculate bonuses from the upgrade. Can return a single value or an object with multiple values
+                let ret = player[this.layer].points.add(1).pow(player[this.layer].upgrades.includes(24)?1.1:(player[this.layer].upgrades.includes(14)?0.9:0.6)) 
                 if (ret.gte("1e20000000")) ret = ret.sqrt().times("1e10000000")
                 return ret;
             },
