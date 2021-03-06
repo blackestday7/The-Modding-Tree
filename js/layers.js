@@ -18,6 +18,7 @@ addLayer("a", {
     gainMult() { // Calculate the multiplier for main currency from bonuses
         mult = new Decimal(1)
         if (hasUpgrade("a", 23)) mult = mult.times(upgradeEffect("a", 23))
+        if (hasUpgrade("a", 32)) mult = mult.times(upgradeEffect("a", 32))
         return mult
     },
     gainExp() { // Calculate the exponent on main currency from bonuses
@@ -30,7 +31,7 @@ addLayer("a", {
         {key: "a", description: "A: Reset for Attention spans", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
     ],
     upgrades: {
-        rows: 2,
+        rows: 3,
         cols: 3,
         11: {
             title: "Generator of Genericness",
@@ -46,6 +47,7 @@ addLayer("a", {
             effect() { // Calculate bonuses from the upgrade. Can return a single value or an object with multiple values
                 let ret = player[this.layer].points.add(1).pow(player[this.layer].upgrades.includes(24)?1.1:(player[this.layer].upgrades.includes(14)?0.75:0.5)) 
                 if (ret.gte("1e20000000")) ret = ret.sqrt().times("1e10000000")
+                if (hasUpgrade("a", 31)) ret = ret.pow(upgradeEffect("a", 31))
                 return ret;
             },
             effectDisplay() { return format(this.effect())+"x" }, // Add formatting to the effect
@@ -99,6 +101,42 @@ addLayer("a", {
             },
             effectDisplay() { return format(this.effect())+"x" }, // Add formatting to the effect
         },
+        31: {
+            title: "Doggo",
+            description: "Doggo.",
+            cost: new Decimal(1e10),
+            unlocked() {return hasMilestone("h", 0)},
+            effect() { // Calculate bonuses from the upgrade. Can return a single value or an object with multiple values
+                let ret = player[this.layer].points.add(1).pow(player[this.layer].upgrades.includes(24)?1.1:(player[this.layer].upgrades.includes(14)?0.1:0.05)) 
+                if (ret.gte("1e20000000")) ret = ret.sqrt().times("1e10000000")
+                return ret;
+            },
+            effectDisplay() { return format(this.effect())+"x" }, // Add formatting to the effect
+        },
+        32: {
+            title: "Staring at the clock",
+            description: "Attention span gain is faster based on Hyperfixations.",
+            cost: new Decimal(1e12),
+            unlocked() { return (hasUpgrade(this.layer, 31))},
+            effect() { // Calculate bonuses from the upgrade. Can return a single value or an object with multiple values
+                let ret = player["h"].points.add(1).pow(player[this.layer].upgrades.includes(24)?1.1:(player[this.layer].upgrades.includes(14)?0.5:0.3)) 
+                if (ret.gte("1e20000000")) ret = ret.sqrt().times("1e10000000")
+                return ret;
+            },
+            effectDisplay() { return format(this.effect())+"x" }, // Add formatting to the effect
+        },
+        33: {
+            title: "...",
+            description: "...",
+            cost: new Decimal(1e100),
+            unlocked() { return (hasUpgrade(this.layer, 32))},
+            effect() { // Calculate bonuses from the upgrade. Can return a single value or an object with multiple values
+                let ret = player[this.layer].points.add(1).pow(player[this.layer].upgrades.includes(24)?1.1:(player[this.layer].upgrades.includes(14)?5:2.5)) 
+                if (ret.gte("1e20000000")) ret = ret.sqrt().times("1e10000000")
+                return ret;
+            },
+            effectDisplay() { return format(this.effect())+"x" }, // Add formatting to the effect
+        },
     },
 })  
 addLayer("h", {
@@ -143,5 +181,11 @@ addLayer("h", {
             },
             effectDisplay() { return format(this.effect())+"x" }, // Add formatting to the effect
         }
+    },
+    milestones: {
+        0: {requirementDescription: "3 Hyperfixations",
+            done() {return player[this.layer].best.gte(3)}, // Used to determine when to give the milestone
+            effectDescription: "Unlock extra Upgrades for Attetion spans",
+        },
     }
 })
