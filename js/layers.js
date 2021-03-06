@@ -121,9 +121,6 @@ addLayer("h", {
     },
     row: 1, // Row the layer is in on the tree (0 is the first row)
     branches: ["a"],
-    tooltipLocked() { // Optional, tooltip displays when the layer is locked
-        return ("Locked needs" + this.requires() + " ADHD. You currently have " + formatWhole(player.points))
-    },
     hotkeys: [
         {key: "h", description: "H: Reset for Hyperfixations", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
     ],
