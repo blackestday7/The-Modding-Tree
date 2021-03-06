@@ -11,7 +11,8 @@ addLayer("a", {
     resource: "Attention spans", // Name of prestige currency
     baseResource: "ADHD", // Name of resource prestige is based on
     baseAmount() {return player.points}, // Get the current amount of baseResource
-    type: "normal", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
+    type: "normal",
+    softcap: 1e5, // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
     exponent: 0.5, // Prestige currency exponent
     gainMult() { // Calculate the multiplier for main currency from bonuses
         mult = new Decimal(1)
