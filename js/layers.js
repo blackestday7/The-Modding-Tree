@@ -12,12 +12,6 @@ addLayer("a", {
     baseResource: "ADHD", // Name of resource prestige is based on
     baseAmount() {return player.points}, // Get the current amount of baseResource
     type: "normal", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
-    get softcap() {
-        return this._softcap
-    },
-    set softcap(value) {
-        this._softcap = 1e5
-    },
     exponent: 0.5, // Prestige currency exponent
     gainMult() { // Calculate the multiplier for main currency from bonuses
         mult = new Decimal(1)
@@ -114,7 +108,7 @@ addLayer("h", {
 		points: new Decimal(0),
     }},
     color: "#47eda8",
-    requires: new Decimal(1e6), // Can be a function that takes requirement increases into account
+    requires: new Decimal(1e9), // Can be a function that takes requirement increases into account
     resource: "Hyperfixations", // Name of prestige currency
     baseResource: "Attention spans", // Name of resource prestige is based on
     baseAmount() {return player["a"].points}, // Get the current amount of baseResource
@@ -141,7 +135,7 @@ addLayer("h", {
             cost: new Decimal(1),
             unlocked: true,
             effect() { // Calculate bonuses from the upgrade. Can return a single value or an object with multiple values
-                let ret = player[this.layer].points.add(1).pow(player[this.layer].upgrades.includes(24)?1.1:(player[this.layer].upgrades.includes(14)?0.1:0.05)) 
+                let ret = player[this.layer].points.add(1).pow(player[this.layer].upgrades.includes(24)?1.1:(player[this.layer].upgrades.includes(14)?0.175:0.125)) 
                 if (ret.gte("1e20000000")) ret = ret.sqrt().times("1e10000000")
                 return ret;
             },
