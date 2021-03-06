@@ -17,12 +17,10 @@ let VERSION = {
 }
 
 let changelog = `<h1>Changelog:</h1><br>
-	<h3>v0.1</h3><br>
+	<h3>v0.3</h3><br>
 		- Added Attention spans.<br>
-	<h3>v0.2</h3><br>
 		- Added Hyperfixations.
 		- Balancing fixes.
-	<h3>v0.3</h3><br>
 		- Added Doggo's. `
 
 let winText = `Congratulations! You have reached the end and beaten this game, but for now...`
