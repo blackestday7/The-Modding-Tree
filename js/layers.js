@@ -13,8 +13,8 @@ addLayer("a", {
     baseAmount() {return player.points}, // Get the current amount of baseResource
     type: "normal", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
     exponent: 0.5, // Prestige currency exponent
-    softcap: new Decimal(1e7), 
-    softcapPower: new Decimal(0.3),
+    softcap: new Decimal(1e8), 
+    softcapPower: new Decimal(0.1),
     gainMult() { // Calculate the multiplier for main currency from bonuses
         mult = new Decimal(1)
         if (hasUpgrade("a", 23)) mult = mult.times(upgradeEffect("a", 23))
@@ -109,6 +109,7 @@ addLayer("a", {
             effect() { // Calculate bonuses from the upgrade. Can return a single value or an object with multiple values
                 let ret = player[this.layer].points.add(1).pow(player[this.layer].upgrades.includes(24)?1.1:(player[this.layer].upgrades.includes(14)?0.1:0.05)) 
                 if (ret.gte("1e20000000")) ret = ret.sqrt().times("1e10000000")
+                if (hasUpgrade("d", 11)) ret = ret.times(upgradeEffect("d", 11))
                 return ret;
             },
             effectDisplay() { return format(this.effect())+"x" }, // Add formatting to the effect
@@ -172,7 +173,7 @@ addLayer("h", {
         11: {
             title: "POOOWWWEEEEERRR",
             description: "Add an exponent......... somewhere? Probably based of something",
-            cost: new Decimal(1),
+            cost: new Decimal(2),
             unlocked: true,
             effect() { // Calculate bonuses from the upgrade. Can return a single value or an object with multiple values
                 let ret = player[this.layer].points.add(1).pow(player[this.layer].upgrades.includes(24)?1.1:(player[this.layer].upgrades.includes(14)?0.175:0.125)) 
@@ -188,4 +189,48 @@ addLayer("h", {
             effectDescription: "Unlock extra Upgrades for Attention spans",
         },
     }
+})
+addLayer("d", {
+    name: "Doggo", // This is optional, only used in a few places, If absent it just uses the layer id.
+    symbol: "D", // This appears on the layer's node. Default is the id with the first letter capitalized
+    position: 0, // Horizontal position within a row. By default it uses the layer id and sorts in alphabetical order
+    startData() { return {
+        unlocked: true,
+		points: new Decimal(0),
+    }},
+    color: "#47eda8",
+    requires: new Decimal(1e9), // Can be a function that takes requirement increases into account
+    resource: "Doggo's", // Name of prestige currency
+    baseResource: "Attention spans", // Name of resource prestige is based on
+    baseAmount() {return player["a"].points}, // Get the current amount of baseResource
+    type: "static", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
+    exponent: 0.5, // Prestige currency exponent
+    gainMult() { // Calculate the multiplier for main currency from bonuses
+        mult = new Decimal(1)
+        return mult
+    },
+    gainExp() { // Calculate the exponent on main currency from bonuses
+        return new Decimal(1)
+    },
+    row: 1, // Row the layer is in on the tree (0 is the first row)
+    branches: ["a"],
+    hotkeys: [
+        {key: "d", description: "D: Reset for Doggo's", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
+    ],
+    upgrades: {
+        rows: 2,
+        cols: 3,
+        11: {
+            title: "Puppy",
+            description: "Descriptions are hard, have a puppy",
+            cost: new Decimal(2),
+            unlocked: true,
+            effect() { // Calculate bonuses from the upgrade. Can return a single value or an object with multiple values
+                let ret = player[this.layer].points.add(1).pow(player[this.layer].upgrades.includes(24)?1.1:(player[this.layer].upgrades.includes(14)?0.5:0.3)) 
+                if (ret.gte("1e20000000")) ret = ret.sqrt().times("1e10000000")
+                return ret;
+            },
+            effectDisplay() { return format(this.effect())+"x" }, // Add formatting to the effect
+        }
+    },
 })
