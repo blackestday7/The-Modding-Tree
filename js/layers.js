@@ -233,12 +233,11 @@ addLayer("d", {
     milestones: {
         0: {requirementDescription: "3 Doggo's",
             done() {return player[this.layer].best.gte(3)}, // Used to determine when to give the milestone
-            toggles: [
-                ["a", "autoUpgrade"]],
-            effectDescription: "Unlock Auto-upgrade for Attention spans",
+            effectDescription: "Unlocks the next milestone, i guess?",
         },
         1: {requirementDescription: "10 Doggo's",
             done() {return player[this.layer].best.gte(10)}, // Used to determine when to give the milestone
+            unlocked() {return hasMilestone(this.layer, 0)},
             effectDescription: "Unlock MAX buy for Doggo's",
         },
     }
