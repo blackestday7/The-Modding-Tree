@@ -124,4 +124,20 @@ addLayer("h", {
     hotkeys: [
         {key: "h", description: "H: Reset for Hyperfixations", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
     ],
+    upgrades: {
+        rows: 2,
+        cols: 3,
+        11: {
+            title: "POOOWWWEEEEERRR",
+            description: "Add an exponent......... somewhere?",
+            cost: new Decimal(1),
+            unlocked: true,
+            effect() { // Calculate bonuses from the upgrade. Can return a single value or an object with multiple values
+                let ret = player[this.layer].points.add(1).pow(player[this.layer].upgrades.includes(24)?1.1:(player[this.layer].upgrades.includes(14)?0.1:0.05)) 
+                if (ret.gte("1e20000000")) ret = ret.sqrt().times("1e10000000")
+                return ret;
+            },
+            effectDisplay() { return format(this.effect())+"x" }, // Add formatting to the effect
+        }
+    }
 })
