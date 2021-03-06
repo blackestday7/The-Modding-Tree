@@ -1,5 +1,5 @@
 let modInfo = {
-	name: "The Stupid Tree",
+	name: "The Distracting Tree",
 	id: "dumb",
 	author: "A guy you'll never hear from again",
 	pointsName: "ADHD",
