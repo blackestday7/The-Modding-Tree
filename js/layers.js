@@ -131,7 +131,7 @@ addLayer("h", {
         cols: 3,
         11: {
             title: "POOOWWWEEEEERRR",
-            description: "Add an exponent......... somewhere?",
+            description: "Add an exponent......... somewhere? Probably based of something",
             cost: new Decimal(1),
             unlocked: true,
             effect() { // Calculate bonuses from the upgrade. Can return a single value or an object with multiple values
