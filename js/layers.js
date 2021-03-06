@@ -174,6 +174,18 @@ addLayer("h", {
             },
             effectDisplay() { return format(this.effect())+"^" }, // Add formatting to the effect
         },
+        12: {
+            title: "Where was i?",
+            description: "Doubles the effect of the previous upgrade",
+            cost: new Decimal(6),
+            unlocked() { return (hasUpgrade(this.layer, 11))},
+            effect() { // Calculate bonuses from the upgrade. Can return a single value or an object with multiple values
+                let ret = 2 
+                if (ret.gte("1e20000000")) ret = ret.sqrt().times("1e10000000")
+                return ret;
+            },
+            effectDisplay() { return format(this.effect())+"^" }, // Add formatting to the effect
+        },
     },
     milestones: {
         0: {requirementDescription: "3 Hyperfixations",
