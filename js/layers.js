@@ -233,4 +233,5 @@ addLayer("d", {
             effectDisplay() { return format(this.effect())+"x" }, // Add formatting to the effect
         }
     },
+    layerShown() {hasUpgrade("a", 31)},
 })
