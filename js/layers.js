@@ -238,6 +238,57 @@ addLayer("d", {
             effectDisplay() { return format(this.effect())+"^" }, // Add formatting to the effect
         }
     },
+    buyables: {
+        rows: 1,
+        cols: 3,
+        showRespec: true,
+        respec() { // Optional, reset things and give back your currency. Having this function makes a respec button appear
+            player[this.layer].points = player[this.layer].points.add(player[this.layer].spentOnBuyables) // A built-in thing to keep track of this but only keeps a single value
+            resetBuyables(this.layer)
+            doReset(this.layer, true) // Force a reset
+        },
+        respecText: "Respec Dogs", // Text on Respec button, optional
+        11: {
+            title: "Labradors", // Optional, displayed at the top in a larger font
+            cost(x=player[this.layer].buyables[this.id]) { // cost for buying xth buyable, can be an object if there are multiple currencies
+                if (x.gte(25)) x = x.pow(2).div(25)
+                let cost = Decimal.pow(2, x.pow(1.5))
+                return cost.floor()
+            },
+            effect(x=player[this.layer].buyables[this.id]) { // Effects of owning x of the items, x is a decimal
+                let eff = {}
+                if (x.gte(0)) eff.first = Decimal.pow(25, x.pow(1.1))
+                else eff.first = Decimal.pow(1/25, x.times(-1).pow(1.1))
+            
+                if (x.gte(0)) eff.second = x.pow(0.8)
+                else eff.second = x.times(-1).pow(0.8).times(-1)
+                return eff;
+            },
+            display() { // Everything else displayed in the buyable button after the title
+                let data = tmp[this.layer].buyables[this.id]
+                return "Cost: " + format(data.cost) + " Doggo's\n\
+                Amount: " + player[this.layer].buyables[this.id] + "\n\
+                Adds + " + format(data.effect.first) + " things and multiplies stuff by " + format(data.effect.second)
+            },
+            unlocked() { return player[this.layer].unlocked }, 
+            canAfford() {
+                return player[this.layer].points.gte(tmp[this.layer].buyables[this.id].cost)},
+            buy() { 
+                cost = tmp[this.layer].buyables[this.id].cost
+                player[this.layer].points = player[this.layer].points.sub(cost)	
+                player[this.layer].buyables[this.id] = player[this.layer].buyables[this.id].add(1)
+                player[this.layer].spentOnBuyables = player[this.layer].spentOnBuyables.add(cost) // This is a built-in system that you can use for respeccing but it only works with a single Decimal value
+            },
+            buyMax() {}, // You'll have to handle this yourself if you want
+            style: {'height':'222px'},
+            sellOne() {
+                let amount = getBuyableAmount(this.layer, this.id)
+                if (amount.lte(0)) return // Only sell one if there is at least one
+                setBuyableAmount(this.layer, this.id, amount.sub(1))
+                player[this.layer].points = player[this.layer].points.add(this.cost)
+            },
+        },
+    },
     milestones: {
         0: {requirementDescription: "3 Doggo's",
             done() {return player[this.layer].best.gte(3)}, // Used to determine when to give the milestone
