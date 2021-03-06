@@ -185,7 +185,7 @@ addLayer("h", {
     milestones: {
         0: {requirementDescription: "3 Hyperfixations",
             done() {return player[this.layer].best.gte(3)}, // Used to determine when to give the milestone
-            effectDescription: "Unlock extra Upgrades for Attetion spans",
+            effectDescription: "Unlock extra Upgrades for Attention spans",
         },
     }
 })
