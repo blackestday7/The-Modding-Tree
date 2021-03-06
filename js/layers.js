@@ -136,7 +136,7 @@ addLayer("a", {
                 if (ret.gte("1e20000000")) ret = ret.sqrt().times("1e10000000")
                 return ret;
             },
-            effectDisplay() { return format(this.effect())+"x" }, // Add formatting to the effect
+            effectDisplay() { return format(this.effect())+"^" }, // Add formatting to the effect
         },
     },
 })  
@@ -181,7 +181,7 @@ addLayer("h", {
                 if (ret.gte("1e20000000")) ret = ret.sqrt().times("1e10000000")
                 return ret;
             },
-            effectDisplay() { return format(this.effect())+"x" }, // Add formatting to the effect
+            effectDisplay() { return format(this.effect())+"^" }, // Add formatting to the effect
         }
     },
     milestones: {
@@ -232,7 +232,7 @@ addLayer("d", {
                 if (ret.gte("1e20000000")) ret = ret.sqrt().times("1e10000000")
                 return ret;
             },
-            effectDisplay() { return format(this.effect())+"x" }, // Add formatting to the effect
+            effectDisplay() { return format(this.effect())+"^" }, // Add formatting to the effect
         }
     },
 })
