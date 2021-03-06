@@ -15,6 +15,7 @@ addLayer("a", {
     exponent: 0.5, // Prestige currency exponent
     softcap: new Decimal(1e8), 
     softcapPower: new Decimal(0.1),
+    autoUpgrade: false,
     gainMult() { // Calculate the multiplier for main currency from bonuses
         mult = new Decimal(1)
         if (hasUpgrade("a", 23)) mult = mult.times(upgradeEffect("a", 23))
@@ -144,6 +145,7 @@ addLayer("h", {
     type: "static", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
     exponent: 0.8, // Prestige currency exponent
     base: 3,
+    canBuyMax() {return hasMilestone("h", 1)},
     gainMult() { // Calculate the multiplier for main currency from bonuses
         mult = new Decimal(1)
         return mult
@@ -177,6 +179,10 @@ addLayer("h", {
             done() {return player[this.layer].best.gte(3)}, // Used to determine when to give the milestone
             effectDescription: "Unlock extra Upgrades for Attention spans",
         },
+        1: {requirementDescription: "10 Hyperfixations",
+            done() {return player[this.layer].best.gte(10)}, // Used to determine when to give the milestone
+            effectDescription: "Unlock MAX buy for Hyperfixations",
+        },
     }
 })
 addLayer("d", {
@@ -195,6 +201,7 @@ addLayer("d", {
     type: "static", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
     exponent: 0.8, // Prestige currency exponent
     base: 3,
+    canBuyMax() {return hasMilestone("d", 1)},
     gainMult() { // Calculate the multiplier for main currency from bonuses
         mult = new Decimal(1)
         return mult
@@ -223,4 +230,16 @@ addLayer("d", {
             effectDisplay() { return format(this.effect())+"^" }, // Add formatting to the effect
         }
     },
+    milestones: {
+        0: {requirementDescription: "3 Doggo's",
+            done() {return player[this.layer].best.gte(3)}, // Used to determine when to give the milestone
+            toggles: [
+                ["a", autoUpgrade = true]],
+            effectDescription: "Unlock Auto-upgrade for Attention spans",
+        },
+        1: {requirementDescription: "10 Doggo's",
+            done() {return player[this.layer].best.gte(10)}, // Used to determine when to give the milestone
+            effectDescription: "Unlock MAX buy for Doggo's",
+        },
+    }
 })
