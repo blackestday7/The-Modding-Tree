@@ -75,7 +75,7 @@ addLayer("a", {
                 let data = tmp[this.layer].buyables[this.id]
                 return "Cost: " + format(data.cost) + " Attention spans\n\
                 Amount: " + player[this.layer].buyables[this.id] + "\n\
-                Adds + " + format(data.effect.first) + " things and multiplies stuff by " + format(data.effect.second)
+                Adds + " + format(data.effect.first) + " ADHD and multiplies stuff by " + format(data.effect.second)
             },
             unlocked() { return (hasUpgrade(this.layer, 12))}, 
             canAfford() {
