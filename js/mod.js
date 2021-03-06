@@ -12,14 +12,18 @@ let modInfo = {
 
 // Set your version in num and name
 let VERSION = {
-	num: "0.2",
-	name: "It's a start",
+	num: "0.3",
+	name: "DOGGO",
 }
 
 let changelog = `<h1>Changelog:</h1><br>
-	<h3>v0.0</h3><br>
+	<h3>v0.1</h3><br>
 		- Added Attention spans.<br>
-		- Added Hyperfixations.`
+	<h3>v0.2</h3><br>
+		- Added Hyperfixations.
+		- Balancing fixes
+	<h3>v0.3</h3><br>
+		- Added Doggo's`
 
 let winText = `Congratulations! You have reached the end and beaten this game, but for now...`
 
