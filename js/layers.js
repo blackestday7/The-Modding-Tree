@@ -185,7 +185,7 @@ addLayer("h", {
                 return ret;
             },
             effectDisplay() { return format(this.effect())+"^" }, // Add formatting to the effect
-        }
+        },
     },
     milestones: {
         0: {requirementDescription: "3 Hyperfixations",
