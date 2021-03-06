@@ -164,7 +164,7 @@ addLayer("h", {
         11: {
             title: "POOOWWWEEEEERRR",
             description: "Add an exponent......... somewhere? Probably based of something",
-            cost: new Decimal(2),
+            cost: new Decimal(1),
             unlocked: true,
             effect() { // Calculate bonuses from the upgrade. Can return a single value or an object with multiple values
                 let ret = player[this.layer].points.add(1).pow(player[this.layer].upgrades.includes(24)?1.1:(player[this.layer].upgrades.includes(14)?0.175:0.125)) 
@@ -228,7 +228,7 @@ addLayer("d", {
         11: {
             title: "Puppy",
             description: "Descriptions are hard, have a puppy",
-            cost: new Decimal(2),
+            cost: new Decimal(1),
             unlocked: true,
             effect() { // Calculate bonuses from the upgrade. Can return a single value or an object with multiple values
                 let ret = player[this.layer].points.add(1).pow(player[this.layer].upgrades.includes(24)?1.1:(player[this.layer].upgrades.includes(14)?0.5:0.3)) 
