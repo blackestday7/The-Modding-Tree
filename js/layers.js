@@ -126,18 +126,6 @@ addLayer("a", {
             },
             effectDisplay() { return format(this.effect())+"x" }, // Add formatting to the effect
         },
-        33: {
-            title: "...",
-            description: "...",
-            cost: new Decimal(1e100),
-            unlocked() { return (hasUpgrade(this.layer, 32))},
-            effect() { // Calculate bonuses from the upgrade. Can return a single value or an object with multiple values
-                let ret = player[this.layer].points.add(1).pow(player[this.layer].upgrades.includes(24)?1.1:(player[this.layer].upgrades.includes(14)?5:2.5)) 
-                if (ret.gte("1e20000000")) ret = ret.sqrt().times("1e10000000")
-                return ret;
-            },
-            effectDisplay() { return format(this.effect())+"^" }, // Add formatting to the effect
-        },
     },
 })  
 addLayer("h", {
