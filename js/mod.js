@@ -1,9 +1,9 @@
 let modInfo = {
 	name: "The Stupid Tree",
 	id: "dumb",
-	author: "nobody",
-	pointsName: "fucks",
-	discordName: "",
+	author: "A guy you'll never hear from again",
+	pointsName: "ADHD",
+	discordName: "DIO",
 	discordLink: "",
 	initialStartPoints: new Decimal(10), // Used for hard resets and new players
 	
