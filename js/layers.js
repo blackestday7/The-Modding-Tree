@@ -270,7 +270,7 @@ addLayer("d", {
                 Amount: " + player[this.layer].buyables[this.id] + "\n\
                 Adds + " + format(data.effect.first) + " things and multiplies stuff by " + format(data.effect.second)
             },
-            unlocked() { return player[this.layer].unlocked }, 
+            unlocked() {return hasMilestone(this.layer, 0)},
             canAfford() {
                 return player[this.layer].points.gte(tmp[this.layer].buyables[this.id].cost)},
             buy() { 
