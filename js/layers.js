@@ -15,6 +15,7 @@ addLayer("a", {
     exponent: 0.5, // Prestige currency exponent
     gainMult() { // Calculate the multiplier for main currency from bonuses
         mult = new Decimal(1)
+        if (hasUpgrade("a", 23)) mult = mult.times(upgradeEffect("a", 23))
         return mult
     },
     gainExp() { // Calculate the exponent on main currency from bonuses
@@ -29,7 +30,7 @@ addLayer("a", {
         cols: 3,
         11: {
             title: "Generator of Genericness",
-            description: "Gain 1 Fuck every second.",
+            description: "Gain 1 ADHD every second.",
             cost: new Decimal(1),
             unlocked() { return player[this.layer].unlocked }, // The upgrade is only visible when this is true
         },
@@ -59,11 +60,11 @@ addLayer("a", {
         },
         21: {
             title: "Exponential dawdling",
-            description: "ADHD generation is even faster based on your unspent ADHD.",
+            description: "ADHD generation is faster based on your ADHD.",
             cost: new Decimal(20),
             unlocked() { return (hasUpgrade(this.layer, 12))},
             effect() { // Calculate bonuses from the upgrade. Can return a single value or an object with multiple values
-                let ret = player.points.add(1).pow(player[this.layer].upgrades.includes(24)?1.1:(player[this.layer].upgrades.includes(14)?0.5:0.25)) 
+                let ret = player.points.add(1).pow(player[this.layer].upgrades.includes(24)?1.1:(player[this.layer].upgrades.includes(14)?0.4:0.2)) 
                 if (ret.gte("1e20000000")) ret = ret.sqrt().times("1e10000000")
                 if (hasUpgrade("a", 22)) ret = ret.times(upgradeEffect("a", 22))
                 return ret;
@@ -75,6 +76,18 @@ addLayer("a", {
             description: "The last upgrade is better based on your unspent Attention span.",
             cost: new Decimal(100),
             unlocked() { return (hasUpgrade(this.layer, 21))},
+            effect() { // Calculate bonuses from the upgrade. Can return a single value or an object with multiple values
+                let ret = player[this.layer].points.add(1).pow(player[this.layer].upgrades.includes(24)?1.1:(player[this.layer].upgrades.includes(14)?0.2:0.1)) 
+                if (ret.gte("1e20000000")) ret = ret.sqrt().times("1e10000000")
+                return ret;
+            },
+            effectDisplay() { return format(this.effect())+"x" }, // Add formatting to the effect
+        },
+        23: {
+            title: "Dawdled dawdling",
+            description: "Attention span gain is better based on your unspent Attention span.",
+            cost: new Decimal(1000),
+            unlocked() { return (hasUpgrade(this.layer, 22))},
             effect() { // Calculate bonuses from the upgrade. Can return a single value or an object with multiple values
                 let ret = player[this.layer].points.add(1).pow(player[this.layer].upgrades.includes(24)?1.1:(player[this.layer].upgrades.includes(14)?0.2:0.1)) 
                 if (ret.gte("1e20000000")) ret = ret.sqrt().times("1e10000000")
