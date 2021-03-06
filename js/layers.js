@@ -234,7 +234,7 @@ addLayer("d", {
         0: {requirementDescription: "3 Doggo's",
             done() {return player[this.layer].best.gte(3)}, // Used to determine when to give the milestone
             toggles: [
-                ["a", autoUpgrade = true]],
+                ["a", "autoUpgrade"]],
             effectDescription: "Unlock Auto-upgrade for Attention spans",
         },
         1: {requirementDescription: "10 Doggo's",
