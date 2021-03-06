@@ -105,7 +105,7 @@ addLayer("h", {
         unlocked: true,
 		points: new Decimal(0),
     }},
-    color: "#4BDC13",
+    color: "#47eda8",
     requires: new Decimal(1e6), // Can be a function that takes requirement increases into account
     resource: "Hyperfixations", // Name of prestige currency
     baseResource: "Attention spans", // Name of resource prestige is based on
