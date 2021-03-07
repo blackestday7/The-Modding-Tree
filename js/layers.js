@@ -331,7 +331,4 @@ addLayer("p", {
     hotkeys: [
         {key: "d", description: "D: Reset for Doggo's", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
     ],
-    tooltipLocked() { // Optional, tooltip displays when the layer is locked
-        return ("HA! Nice try, but you won't get past here unless you have" + this.requires() + " Hyperfixations. And you only have " + formatWhole(player.points))
-    },
 })
