@@ -164,20 +164,20 @@ addLayer("h", {
         cols: 3,
         11: {
             title: "POOOWWWEEEEERRR",
-            description: "Add an exponent......... somewhere? Probably based of something",
+            description: "Add an exponent......... somewhere? Probably based of something.",
             cost: new Decimal(1),
             unlocked: true,
             effect() { // Calculate bonuses from the upgrade. Can return a single value or an object with multiple values
                 let ret = player[this.layer].points.add(1).pow(player[this.layer].upgrades.includes(24)?1.1:(player[this.layer].upgrades.includes(14)?0.175:0.125)) 
                 if (ret.gte("1e20000000")) ret = ret.sqrt().times("1e10000000")
-                if (hasUpgrade("h", 12)) ret = ret.times(2)
+                if (hasUpgrade("h", 12)) ret = ret.times(1.2)
                 return ret;
             },
             effectDisplay() { return format(this.effect())+"^" }, // Add formatting to the effect
         },
         12: {
             title: "Where was i?",
-            description: "Doubles the effect of the previous upgrade",
+            description: "Makes the effect of the previous upgrade better.",
             cost: new Decimal(6),
             unlocked() { return (hasUpgrade(this.layer, 11))},
             effectDisplay() { return "2x" }, // Add formatting to the effect
@@ -311,7 +311,7 @@ addLayer("p", {
 		points: new Decimal(0),
     }},
     color: "#390273",
-    requires: new Decimal(1e9), // Can be a function that takes requirement increases into account
+    requires: new Decimal(1000), // Can be a function that takes requirement increases into account
     resource: "Prestige points", // Name of prestige currency
     baseResource: "Hyperfixations", // Name of resource prestige is based on
     baseAmount() {return player["h"].points}, // Get the current amount of baseResource
