@@ -331,6 +331,7 @@ addLayer("p", {
     hotkeys: [
         {key: "p", description: "P: Reset for Prestige points", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
     ],
+    layerShown() {return Player["h".points = 1]},
     milestones: {
         0: {requirementDescription: "3 Doggo's",
             done() {return player[this.layer].best.gte(3)}, // Used to determine when to give the milestone
