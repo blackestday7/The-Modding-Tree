@@ -312,13 +312,13 @@ addLayer("p", {
     }},
     color: "#390273",
     requires: new Decimal(1e9), // Can be a function that takes requirement increases into account
-    resource: "Doggo's", // Name of prestige currency
-    baseResource: "Attention spans", // Name of resource prestige is based on
-    baseAmount() {return player["a"].points}, // Get the current amount of baseResource
+    resource: "Prestige points", // Name of prestige currency
+    baseResource: "Hyperfixations", // Name of resource prestige is based on
+    baseAmount() {return player["h"].points}, // Get the current amount of baseResource
     type: "static", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
     exponent: 0.8, // Prestige currency exponent
     base: 3,
-    canBuyMax() {return hasMilestone("d", 1)},
+    canBuyMax() {return hasMilestone("p", 1)},
     gainMult() { // Calculate the multiplier for main currency from bonuses
         mult = new Decimal(1)
         return mult
@@ -327,8 +327,19 @@ addLayer("p", {
         return new Decimal(1)
     },
     row: 2, // Row the layer is in on the tree (0 is the first row)
-    branches: ["a"],
+    branches: ["h"],
     hotkeys: [
-        {key: "d", description: "D: Reset for Doggo's", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
+        {key: "p", description: "P: Reset for Prestige points", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
     ],
+    milestones: {
+        0: {requirementDescription: "3 Doggo's",
+            done() {return player[this.layer].best.gte(3)}, // Used to determine when to give the milestone
+            effectDescription: "Unlocks the next milestone, i guess?",
+        },
+        1: {requirementDescription: "10 Doggo's",
+            done() {return player[this.layer].best.gte(10)}, // Used to determine when to give the milestone
+            unlocked() {return hasMilestone(this.layer, 0)},
+            effectDescription: "Unlock MAX buy for Doggo's",
+        },
+    }
 })
