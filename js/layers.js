@@ -25,6 +25,7 @@ addLayer("a", {
     gainExp() { // Calculate the exponent on main currency from bonuses
         exp = new Decimal(1)
         if (hasUpgrade("h", 11)) mult = mult.pow(upgradeEffect("h", 11))
+        exp = exp.pow(buyableEffect("d", 11))
         return exp
     },
     row: 0, // Row the layer is in on the tree (0 is the first row)
