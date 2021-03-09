@@ -188,7 +188,7 @@ addLayer("h", {
             title: "Ultra-instinct!",
             description: "I swear this does something, cross my heart!.",
             cost: new Decimal(15),
-            unlocked: true,
+            unlocked() { return (hasUpgrade(this.layer, 12))},
             effect() { // Calculate bonuses from the upgrade. Can return a single value or an object with multiple values
                 let ret = player[this.layer].points.add(1).pow(player[this.layer].upgrades.includes(24)?1.3:(player[this.layer].upgrades.includes(14)?0.623:0.211)) 
                 if (ret.gte("1e20000000")) ret = ret.sqrt().times("1e10000000")
