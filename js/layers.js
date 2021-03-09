@@ -24,7 +24,7 @@ addLayer("a", {
     },
     gainExp() { // Calculate the exponent on main currency from bonuses
         exp = new Decimal(1)
-        if (hasUpgrade("h", 11)) mult = mult.pow(upgradeEffect("h", 11))
+        if (hasUpgrade("h", 11)) exp = exp.pow(upgradeEffect("h", 11))
         exp = exp.pow(buyableEffect("d", 11))
         return exp
     },
@@ -152,7 +152,9 @@ addLayer("h", {
         return mult
     },
     gainExp() { // Calculate the exponent on main currency from bonuses
-        return new Decimal(1)
+        exp = new Decimal(1)
+        if (hasUpgrade("p", 11)) exp = exp.pow(upgradeEffect("p", 11))
+        return exp
     },
     row: 1, // Row the layer is in on the tree (0 is the first row)
     branches: ["a"],
@@ -185,7 +187,7 @@ addLayer("h", {
         13: {
             title: "Ultra-instinct!",
             description: "I swear this does something, cross my heart!.",
-            cost: new Decimal(1),
+            cost: new Decimal(15),
             unlocked: true,
             effect() { // Calculate bonuses from the upgrade. Can return a single value or an object with multiple values
                 let ret = player[this.layer].points.add(1).pow(player[this.layer].upgrades.includes(24)?1.3:(player[this.layer].upgrades.includes(14)?0.623:0.211)) 
@@ -322,7 +324,7 @@ addLayer("p", {
 		points: new Decimal(0),
     }},
     color: "#390273",
-    requires: new Decimal(1000), // Can be a function that takes requirement increases into account
+    requires: new Decimal(100), // Can be a function that takes requirement increases into account
     resource: "Prestige points", // Name of prestige currency
     baseResource: "Hyperfixations", // Name of resource prestige is based on
     baseAmount() {return player["h"].points}, // Get the current amount of baseResource
@@ -344,14 +346,14 @@ addLayer("p", {
     ],
     layerShown() {return player["h"].unlocked},
     milestones: {
-        0: {requirementDescription: "3 Doggo's",
+        0: {requirementDescription: "3 Prestige points",
             done() {return player[this.layer].best.gte(3)}, // Used to determine when to give the milestone
-            effectDescription: "Unlocks the next milestone, i guess?",
+            effectDescription: "Unlocks the next milestone, again.",
         },
-        1: {requirementDescription: "10 Doggo's",
+        1: {requirementDescription: "10 Prestige points",
             done() {return player[this.layer].best.gte(10)}, // Used to determine when to give the milestone
             unlocked() {return hasMilestone(this.layer, 0)},
-            effectDescription: "Unlock MAX buy for Doggo's",
+            effectDescription: "Unlock MAX buy for Prestige points",
         },
     },
     upgrades: {
