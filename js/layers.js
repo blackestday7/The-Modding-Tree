@@ -318,8 +318,8 @@ addLayer("d", {
     }
 })
 addLayer("p", {
-    name: "Prestige", // This is optional, only used in a few places, If absent it just uses the layer id.
-    symbol: "P", // This appears on the layer's node. Default is the id with the first letter capitalized
+    name: "Hyperprestige", // This is optional, only used in a few places, If absent it just uses the layer id.
+    symbol: "HP", // This appears on the layer's node. Default is the id with the first letter capitalized
     position: 0, // Horizontal position within a row. By default it uses the layer id and sorts in alphabetical order
     startData() { return {
         unlocked: false,
@@ -327,7 +327,7 @@ addLayer("p", {
     }},
     color: "#390273",
     requires: new Decimal(100), // Can be a function that takes requirement increases into account
-    resource: "Prestige points", // Name of prestige currency
+    resource: "Hyper points", // Name of prestige currency
     baseResource: "Hyperfixations", // Name of resource prestige is based on
     baseAmount() {return player["h"].points}, // Get the current amount of baseResource
     type: "static", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
@@ -348,11 +348,11 @@ addLayer("p", {
     ],
     layerShown() {return player["h"].unlocked},
     milestones: {
-        0: {requirementDescription: "3 Prestige points",
+        0: {requirementDescription: "3 Hyper points",
             done() {return player[this.layer].best.gte(3)}, // Used to determine when to give the milestone
             effectDescription: "Unlocks the next milestone, again.",
         },
-        1: {requirementDescription: "10 Prestige points",
+        1: {requirementDescription: "10 Hyper points",
             done() {return player[this.layer].best.gte(10)}, // Used to determine when to give the milestone
             unlocked() {return hasMilestone(this.layer, 0)},
             effectDescription: "Unlock MAX buy for Prestige points",
@@ -362,7 +362,7 @@ addLayer("p", {
         rows: 2,
         cols: 3,
         11: {
-            title: "Prestigious",
+            title: "Hyperigious",
             description: "Bet you feel cool now, huh?",
             cost: new Decimal(1),
             unlocked: true,
