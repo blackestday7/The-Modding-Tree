@@ -55,6 +55,8 @@ function getPointGen() {
 
 // You can add non-layer related variables that should to into "player" and be saved here, along with default values
 function addedPlayerData() { return {
+	softcap: new Decimal(1e20), 
+    softcapPower: new Decimal(0.2),
 }}
 
 // Display extra things at the top of the page
