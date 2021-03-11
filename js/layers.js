@@ -462,7 +462,7 @@ addLayer("g", {
     hotkeys: [
         {key: "g", description: "G: Reset for Gold", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
     ],
-    layerShown() {return player["h"].unlocked},
+    layerShown() {return player["h", "d"].unlocked},
     milestones: {
         0: {requirementDescription: "3 Gold coins",
             done() {return player[this.layer].best.gte(3)}, // Used to determine when to give the milestone
