@@ -444,8 +444,8 @@ addLayer("g", {
     color: "#390273",
     requires: new Decimal(100), // Can be a function that takes requirement increases into account
     resource: "Gold coins", // Name of prestige currency
-    baseResource: "Hyperfixations", // Name of resource prestige is based on
-    baseAmount() {return player["h"].points}, // Get the current amount of baseResource
+    baseResource: "Hyperfixations and Doggo's", // Name of resource prestige is based on
+    baseAmount() {return player["h", "d"].points}, // Get the current amount of baseResource
     type: "static", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
     exponent: 0.8, // Prestige currency exponent
     base: 3,
