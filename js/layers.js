@@ -458,7 +458,7 @@ addLayer("g", {
         return new Decimal(1)
     },
     row: 2, // Row the layer is in on the tree (0 is the first row)
-    branches: ["d"]["h"],
+    branches: ["d"] ["h"],
     hotkeys: [
         {key: "g", description: "G: Reset for Gold", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
     ],
