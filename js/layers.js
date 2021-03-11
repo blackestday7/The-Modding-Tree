@@ -425,11 +425,69 @@ addLayer("q", {
             cost: new Decimal(1),
             unlocked: true,
             effect() { // Calculate bonuses from the upgrade. Can return a single value or an object with multiple values
-                let ret = player[this.layer].points.add(1).pow(player[this.layer].upgrades.includes(24)?1.1:(player[this.layer].upgrades.includes(14)?0.5:0.3)) 
+                let ret = player[this.layer].points.add(1).pow(player[this.layer].upgrades.includes(24)?1.1:(player[this.layer].upgrades.includes(14)?0.52:0.33)) 
                 if (ret.gte("1e20000000")) ret = ret.sqrt().times("1e10000000")
                 return ret;
             },
             effectDisplay() { return format(this.effect())+"^" }, // Add formatting to the effect
+        }
+    },
+})
+addLayer("g", {
+    name: "Gold", // This is optional, only used in a few places, If absent it just uses the layer id.
+    symbol: "G", // This appears on the layer's node. Default is the id with the first letter capitalized
+    position: 1, // Horizontal position within a row. By default it uses the layer id and sorts in alphabetical order
+    startData() { return {
+        unlocked: false,
+		points: new Decimal(0),
+    }},
+    color: "#390273",
+    requires: new Decimal(100), // Can be a function that takes requirement increases into account
+    resource: "Gold coins", // Name of prestige currency
+    baseResource: "Hyperfixations", // Name of resource prestige is based on
+    baseAmount() {return player["h"].points}, // Get the current amount of baseResource
+    type: "static", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
+    exponent: 0.8, // Prestige currency exponent
+    base: 3,
+    canBuyMax() {return hasMilestone("g", 1)},
+    gainMult() { // Calculate the multiplier for main currency from bonuses
+        mult = new Decimal(1)
+        return mult
+    },
+    gainExp() { // Calculate the exponent on main currency from bonuses
+        return new Decimal(1)
+    },
+    row: 2, // Row the layer is in on the tree (0 is the first row)
+    branches: ["d"]["h"],
+    hotkeys: [
+        {key: "g", description: "G: Reset for Gold", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
+    ],
+    layerShown() {return player["h"].unlocked},
+    milestones: {
+        0: {requirementDescription: "3 Gold coins",
+            done() {return player[this.layer].best.gte(3)}, // Used to determine when to give the milestone
+            effectDescription: "Unlocks the next milestone for the last time, i swear!",
+        },
+        1: {requirementDescription: "10 Gold coins",
+            done() {return player[this.layer].best.gte(10)}, // Used to determine when to give the milestone
+            unlocked() {return hasMilestone(this.layer, 0)},
+            effectDescription: "Unlock MAX buy for Prestige points",
+        },
+    },
+    upgrades: {
+        rows: 2,
+        cols: 3,
+        11: {
+            title: "Gamer",
+            description: "Bet you feel gross now, huh?",
+            cost: new Decimal(1),
+            unlocked: true,
+            effect() { // Calculate bonuses from the upgrade. Can return a single value or an object with multiple values
+                let ret = player[this.layer].points.add(1).pow(player[this.layer].upgrades.includes(24)?1.1:(player[this.layer].upgrades.includes(14)?0.8:0.4)) 
+                if (ret.gte("1e20000000")) ret = ret.sqrt().times("1e10000000")
+                return ret;
+            },
+            effectDisplay() { return format(this.effect())+"x" }, // Add formatting to the effect
         }
     },
 })
