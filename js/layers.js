@@ -172,7 +172,7 @@ addLayer("h", {
             effect() { // Calculate bonuses from the upgrade. Can return a single value or an object with multiple values
                 let ret = player[this.layer].points.add(1).pow(player[this.layer].upgrades.includes(24)?1.1:(player[this.layer].upgrades.includes(14)?0.175:0.025)) 
                 if (ret.gte("1e20000000")) ret = ret.sqrt().times("1e10000000")
-                if (hasUpgrade("h", 12)) ret = ret.times(1.2)
+                if (hasUpgrade("h", 12)) ret = ret.times(2)
                 return ret;
             },
             effectDisplay() { return format(this.effect())+"^" }, // Add formatting to the effect
